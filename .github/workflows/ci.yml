@@ -59,8 +59,6 @@ jobs:
       # 5. Run Automated Tests
       - name: Run Tests
         run: npm test --if-present
-
-        - name: Run Tests
         env:
           REDIS_URL: redis://localhost:6379
           GOOGLE_CLIENT_ID: "mock-google-client-id"

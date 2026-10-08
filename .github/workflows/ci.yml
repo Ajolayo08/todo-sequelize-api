@@ -59,9 +59,10 @@ jobs:
       # 5. Run Automated Tests
       - name: Run Tests
         env:
+         NODE_ENV: test
           REDIS_URL: redis://localhost:6379
-          GOOGLE_CLIENT_ID: "mock-google-client-id"
-          GOOGLE_CLIENT_SECRET: "mock-google-client-secret"
-          SESSION_SECRET: "mock-session-secret"
+          GOOGLE_CLIENT_ID: mock-google-client-id
+          GOOGLE_CLIENT_SECRET: mock-google-client-secret
+          SESSION_SECRET: mock-session-secret
           PORT: 3000
         run: npm test

@@ -25,7 +25,7 @@ jobs:
 
       # 3. Install dependencies cleanly
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       # 4. Run Linter (Checks code quality)
       - name: Run ESLint

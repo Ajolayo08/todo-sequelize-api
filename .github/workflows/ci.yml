@@ -1,0 +1,36 @@
+name: Node.js CI Pipeline
+
+# Trigger this workflow on git push or pull request to the main branch
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test_and_lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repository code onto the GitHub runner
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      # 3. Install dependencies cleanly
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Run Linter (Checks code quality)
+      - name: Run ESLint
+        run: npm run lint --if-present
+
+      # 5. Run Automated Tests
+      - name: Run Tests
+        run: npm test --if-present

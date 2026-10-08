@@ -495,7 +495,7 @@ app.post('/logout', (req, res) => {
 });
 
 app.listen({ port: 5000 }, async () => {
-    console.log('Server up on http://localhost5000')
+    await console.log('Server up on http://localhost5000')
     await sequelize.authenticate()
         .then(() => {
             console.log('Database connected!')

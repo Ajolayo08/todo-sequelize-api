@@ -11,10 +11,36 @@ jobs:
   test_and_lint:
     runs-on: ubuntu-latest
 
+    services:
+      redis:
+        image: redis:alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
-      # 1. Checkout repository code onto the GitHub runner
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run ESLint
+        run: npm run lint --if-present
+
+      - name: Run Tests
+        env:
+          REDIS_URL: redis://localhost:6379
+        run: npm test
 
      # 2. Set up Node.js environment
       - name: Setup Node.js

@@ -494,15 +494,23 @@ app.post('/logout', (req, res) => {
     return res.json({ message: 'Logged out successfully' });
 });
 
-app.listen({ port: 5000 }, async () => {
-    await console.log('Server up on http://localhost5000')
-    await sequelize.authenticate()
-        .then(() => {
-            console.log('Database connected!')
-            return sequelize.sync()
-        })
-        .then(() => { console.log('Database updated successfully') })
-        .catch(err => {
-            console.log('Error: ' + err)
-        })
-})
+
+
+// In app.js
+if (process.env.NODE_ENV !== 'test') {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, async () => {
+        console.log(`Server up on http://localhost:${PORT}`);
+        try {
+            await sequelize.authenticate();
+            console.log('Database connected!');
+            await sequelize.sync();
+            console.log('Database updated successfully');
+        } catch (err) {
+            console.log('Error: ' + err);
+        }
+    });
+}
+
+module.exports = app;
+

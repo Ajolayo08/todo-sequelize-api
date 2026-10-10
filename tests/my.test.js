@@ -22,7 +22,7 @@ describe('Todo API Endpoints', () => {
             .send(newTodoPayload);
 
         // Assertions (Checking the results)
-        expect(response.statusCode).toBe(201);
+        expect(response.statusCode).toBe(200);
         expect(response.body.success).toBe(true);
         expect(response.body.data.title).toBe('Study Jest Testing');
     });

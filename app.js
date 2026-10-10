@@ -497,7 +497,7 @@ app.post('/logout', (req, res) => {
 
 
 // In app.js
-if (process.env.NODE_ENV !== 'test') {
+if (require.main === module) {
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, async () => {
         console.log(`Server up on http://localhost:${PORT}`);

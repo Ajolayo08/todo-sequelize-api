@@ -496,21 +496,11 @@ app.post('/logout', (req, res) => {
 
 
 
-// In app.js
-if (require.main === module) {
+if (process.env.NODE_ENV !== 'test') {
     const PORT = process.env.PORT || 5000;
-    app.listen(PORT, async () => {
-        console.log(`Server up on http://localhost:${PORT}`);
-        try {
-            await sequelize.authenticate();
-            console.log('Database connected!');
-            await sequelize.sync();
-            console.log('Database updated successfully');
-        } catch (err) {
-            console.log('Error: ' + err);
-        }
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
     });
 }
 
 module.exports = app;
-

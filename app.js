@@ -494,6 +494,10 @@ app.post('/logout', (req, res) => {
     return res.json({ message: 'Logged out successfully' });
 });
 
+app.get('/', (req, res) => {
+    res.json({ message: 'API is running successfully!' });
+});
+
 
 
 if (process.env.NODE_ENV !== 'test') {
